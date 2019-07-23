@@ -1,4 +1,4 @@
-import persistence
+import persistence, database_common
 
 
 def get_card_status(status_id):
