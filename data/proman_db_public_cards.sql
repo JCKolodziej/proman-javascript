@@ -1,8 +1,8 @@
-UPDATE public.cards SET board_id = 1, title = 'card 1', status_id = 1, _order = 0 WHERE id = 1;
-UPDATE public.cards SET board_id = 1, title = 'card 2', status_id = 2, _order = 1 WHERE id = 2;
-UPDATE public.cards SET board_id = 2, title = 'card 3', status_id = 1, _order = 0 WHERE id = 3;
-UPDATE public.cards SET board_id = 1, title = 'card 4', status_id = 0, _order = 0 WHERE id = 4;
-UPDATE public.cards SET board_id = 1, title = 'card 5', status_id = 3, _order = 1 WHERE id = 5;
-UPDATE public.cards SET board_id = 1, title = 'card6', status_id = 2, _order = 1 WHERE id = 6;
-UPDATE public.cards SET board_id = 2, title = 'card7', status_id = 2, _order = 0 WHERE id = 7;
-UPDATE public.cards SET board_id = 2, title = 'card8', status_id = 1, _order = 0 WHERE id = 8;
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (1, 1, 'card 1', 1, 0);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (2, 1, 'card 2', 2, 1);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (3, 2, 'card 3', 1, 0);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (4, 1, 'card 4', 0, 0);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (5, 1, 'card 5', 3, 1);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (6, 1, 'card6', 2, 1);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (7, 2, 'card7', 2, 0);
+INSERT INTO public.cards (id, board_id, title, status_id, _order) VALUES (8, 2, 'card8', 1, 0);

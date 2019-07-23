@@ -1,2 +1,2 @@
-UPDATE public.boards SET title = 'board 1' WHERE id = 1;
-UPDATE public.boards SET title = 'board 2' WHERE id = 2;
+INSERT INTO public.boards (id, title) VALUES (1, 'board 1');
+INSERT INTO public.boards (id, title) VALUES (2, 'board 2');

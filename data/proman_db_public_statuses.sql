@@ -1,4 +1,4 @@
-UPDATE public.statuses SET title = 'new' WHERE id = 0;
-UPDATE public.statuses SET title = 'in progress' WHERE id = 1;
-UPDATE public.statuses SET title = 'testing' WHERE id = 2;
-UPDATE public.statuses SET title = 'done' WHERE id = 3;
+INSERT INTO public.statuses (id, title) VALUES (0, 'new');
+INSERT INTO public.statuses (id, title) VALUES (1, 'in progress');
+INSERT INTO public.statuses (id, title) VALUES (2, 'testing');
+INSERT INTO public.statuses (id, title) VALUES (3, 'done');
