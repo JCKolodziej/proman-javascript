@@ -10,13 +10,26 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        new_board_title = request.form['card_title']
-        data_handler.create_new_board(new_board_title)
+        if request.form['board_id'] == "[object MouseEvent]":
+            new_board_title = request.form['card_title']
+            data_handler.create_new_board(new_board_title)
+        else:
+            new_card_title = request.form['card_title']
+            board_id_for_new_card = request.form['board_id']
+            data_handler.create_new_card(new_card_title, board_id_for_new_card)
         boards = data_handler.get_all_boards()
-        return render_template('index.html', boards=boards)
+        cards = []
+        for board in boards:
+            cards.append(data_handler.get_cards_for_board(board['id']))
+        return render_template('index.html', boards=boards, cards=cards)
     else:
         boards = data_handler.get_all_boards()
-        return render_template('index.html', boards=boards)
+        print(boards)
+        cards = []
+        for board in boards:
+            cards.append(data_handler.get_cards_for_board(board['id']))
+        print(cards)
+        return render_template('index.html', boards=boards, cards=cards)
 
 
 @app.route("/get-boards")
