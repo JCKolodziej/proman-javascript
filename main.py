@@ -11,18 +11,24 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 def index():
     if request.method == 'POST':
         action_type = request.form['hidden']
+        if action_type == 'delete':
+            delete_id = request.form['delete_id']
+            data_handler.delete_board(delete_id)
+            return redirect('/')
         board_title = request.form['board_title']
         if action_type == 'rename':
             board_id = request.form['board_id']
-            print(board_id)
             data_handler.update_board_name(board_id, board_title)
         else:
             data_handler.create_new_board(board_title)
-        boards = data_handler.get_all_boards()
-        return render_template('index.html', boards=boards)
+        return redirect('/')
     else:
         boards = data_handler.get_all_boards()
         return render_template('index.html', boards=boards)
+
+
+def delete_board(board_id):
+    data_handler.delete_board(board_id)
 
 
 @app.route("/get-boards")

@@ -8,34 +8,35 @@ function init() {
     // dom.loadBoards();
     addNewBoard();
     renameBoardTitle();
+    deleteBoard();
 }
 
 init();
 
 function addNewBoard() {
     let newBoardButton = document.getElementById('top_button');
+    let modal = document.getElementById('modal_container');
     newBoardButton.addEventListener('click', showModal);
-    cancelModal();
+    let cancelButt = document.getElementById('cancel');
+    cancelModal(modal, cancelButt);
 }
 
 function showModal() {
-    let hidden = document.getElementById('hidden');
+    let hidden = document.getElementsByClassName('hidden')[0];
     let modal = document.getElementById('modal_container');
         modal.style.display = 'block';
         hidden.value = 'new';
 }
 
-function cancelModal() {
-    let modal = document.getElementById('modal_container');
-    let cancelButt = document.getElementById('cancel');
-    cancelButt.addEventListener('click', function () {
+function cancelModal(modal, button) {
+    button.addEventListener('click', function () {
         modal.style.display = 'none';
     })
 }
 
 function renameBoardTitle() {
     let modal = document.getElementById('modal_container');
-    let hidden = document.getElementById('hidden');
+    let hidden = document.getElementsByClassName('hidden')[0];
     let renameButton = document.getElementsByClassName('rename');
     let board_title = document.getElementById('board_title');
     for (let board of renameButton) {
@@ -57,4 +58,21 @@ function createHiddenInput(value) {
     input.name = 'board_id';
     input.id = 'board_id';
     form.appendChild(input);
+}
+
+function deleteBoard() {
+    let deleteButtons = document.getElementsByClassName('delete');
+    let deleteModal = document.getElementById('delete_modal');
+    let hiddenInput = document.getElementById('delete_id');
+    let cancelDelete = document.getElementById('cancel_delete');
+    let hidden = document.getElementsByClassName('hidden')[1];
+    for (let deleteButton of deleteButtons) {
+        deleteButton.addEventListener('click', function (event) {
+            hiddenInput.value = event.target.dataset.id;
+            hiddenInput.value = event.target.dataset.id;
+            hidden.value = 'delete';
+            deleteModal.style.display = 'block';
+        })
+    }
+    cancelModal(deleteModal, cancelDelete);
 }

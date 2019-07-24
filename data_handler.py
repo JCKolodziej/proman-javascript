@@ -56,3 +56,12 @@ def update_board_name(cursor, board_id, board_title):
                     WHERE id = %(board_id)s;
                     """, {'board_title': board_title,
                           'board_id': board_id})
+
+
+@database_common.connection_handler
+def delete_board(cursor, board_id):
+    cursor.execute("""
+                    DELETE FROM boards
+                    WHERE id=%(board_id)s;
+                    """,
+                   {'board_id': board_id})
