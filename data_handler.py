@@ -18,16 +18,14 @@ def get_boards():
     """
     return persistence.get_boards(force=True)
 
-
-def get_cards_for_board(board_id):
-    persistence.clear_cache()
-    all_cards = persistence.get_cards()
-    matching_cards = []
-    for card in all_cards:
-        if card['board_id'] == str(board_id):
-            card['status_id'] = get_card_status(card['status_id'])  # Set textual status for the card
-            matching_cards.append(card)
-    return matching_cards
+@database_common.connection_handler
+def get_cards_for_board(cursor, board_id):
+    cursor.execute("""
+                   SELECT * FROM cards
+                   WHERE board_id = %(board_id)s
+                   """, {'board_id': board_id})
+    cards = cursor.fetchall()
+    return cards
 
 
 @database_common.connection_handler
@@ -45,3 +43,10 @@ def create_new_board(cursor, board_title):
                     INSERT INTO boards (title)
                     VALUES (%(board_title)s)
                     """, {'board_title': board_title})
+
+@database_common.connection_handler
+def create_new_card(cursor, card_title, board_id_for_new_card):
+    cursor.execute("""
+                   INSERT INTO cards (title, board_id, status_id)
+                   VALUES (%(card_title)s, %(board_id)s, 1)
+                   """, {'card_title': card_title, 'board_id': board_id_for_new_card})
