@@ -18,6 +18,13 @@
         <script type="module" src="/static/dragula/dragula.js" defer></script>
     </head>
     <body>
+    {% if session['logged_in'] %}
+        <a class="btn btn-primary" href="{{ url_for('logout') }}" role="button">Logout</a>
+    {% else %}
+        <a class="btn btn-primary" href="{{ url_for('login_page') }}" role="button">Login</a>
+        <a class="btn btn-primary" href="{{ url_for('register_page') }}" role="button">Register</a>
+    {% endif %}
+
         {% block content %}
 
         {% endblock %}

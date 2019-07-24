@@ -56,7 +56,7 @@ def login_process():
             session['username'] = username
             session['password'] = password
             session['logged_in'] = True
-            return render_template('success.html')
+            return redirect(url_for('index'))
         else:
             return render_template('fail.html')
 
@@ -66,7 +66,7 @@ def logout():
     session.pop('username', None)
     session.pop('password', None)
     session.pop('logged_in', None)
-    return redirect(url_for('main'))
+    return redirect(url_for('index'))
 
 
 @app.route('/registration_process', methods=['GET', 'POST'])
@@ -75,7 +75,11 @@ def register_process():
         username = request.form['usernameRegister']
         password = request.form['passwordRegister']
         if login.register(username, password):
-            return render_template('success.html')
+            login.login(username, password)
+            session['username'] = username
+            session['password'] = password
+            session['logged_in'] = True
+            return redirect(url_for('index'))
         else:
             return render_template('fail.html')
 
