@@ -15,52 +15,54 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-        <script type="module" src="static/dragula/dragula.js" defer></script>
+        <script type="module" src="/static/dragula/dragula.js" defer></script>
     </head>
     <body>
-        <div class="" id="container">
-            <div class="row">
-                <div class="col">
-                    <h2>ProMan</h2>
+        {% for board in boards %}
+            <div class="" id="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>ProMan</h2>
+                    </div>
+                    <div class="col" id="top_button">
+                        <button ><strong>+</strong> New Board </button>
+                    </div>
                 </div>
-                <div class="col" id="top_button">
-                    <button ><strong>+</strong> New Board </button>
+                <div class="row" id="main_title_row">
+                    <div class="col h-100" id="center_col">
+                        {{ board['title'] }}
+                        <button type="button"> + New Card </button>
+                    </div>
+                </div>
+                <div class="row" id="title_row">
+                    <div class="col border border-dark text-center">
+                        New
+                    </div>
+                    <div class="col border border-dark text-center">
+                        In Progress
+                    </div>
+                    <div class="col border border-dark text-center">
+                        Testing
+                    </div>
+                    <div class="col border border-dark text-center">
+                        Done
+                    </div>
+                </div>
+                <div class="row" id="card-row">
+                    <div class="col dragula-container border border-dark">
+                        <ul></ul>
+                    </div>
+                    <div class="col dragula-container border border-dark">
+                        <ul></ul>
+                    </div>
+                    <div class="col dragula-container border border-dark">
+                        <ul></ul>
+                    </div>
+                    <div class="col dragula-container border border-dark">
+                        <ul></ul>
+                    </div>
                 </div>
             </div>
-            <div class="row" id="main_title_row">
-                <div class="col h-100" id="center_col">
-                    Board Title
-                    <button type="button"> + New Card </button>
-                </div>
-            </div>
-            <div class="row" id="title_row">
-                <div class="col border border-dark text-center">
-                    New
-                </div>
-                <div class="col border border-dark text-center">
-                    In Progress
-                </div>
-                <div class="col border border-dark text-center">
-                    Testing
-                </div>
-                <div class="col border border-dark text-center">
-                    Done
-                </div>
-            </div>
-            <div class="row" id="card-row">
-                <div class="col dragula-container border border-dark">
-                    <ul></ul>
-                </div>
-                <div class="col dragula-container border border-dark">
-                    <ul></ul>
-                </div>
-                <div class="col dragula-container border border-dark">
-                    <ul></ul>
-                </div>
-                <div class="col dragula-container border border-dark">
-                    <ul></ul>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </body>
 </html>
