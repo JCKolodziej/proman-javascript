@@ -1,68 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>ProMan</title>
+{% extends 'layout.html' %}
 
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+{% block content %}
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-        <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-        <script type="module" src="/static/dragula/dragula.js" defer></script>
-    </head>
-    <body>
-        {% for board in boards %}
-            <div class="" id="container">
-                <div class="row">
-                    <div class="col">
-                        <h2>ProMan</h2>
-                    </div>
-                    <div class="col" id="top_button">
-                        <button ><strong>+</strong> New Board </button>
-                    </div>
+    {% for board in boards %}
+        <div class="" id="container">
+            <div class="row">
+                <div class="col">
+                    <h2>ProMan</h2>
                 </div>
-                <div class="row" id="main_title_row">
-                    <div class="col h-100" id="center_col">
-                        {{ board['title'] }}
-                        <button type="button"> + New Card </button>
-                    </div>
-                </div>
-                <div class="row" id="title_row">
-                    <div class="col border border-dark text-center">
-                        New
-                    </div>
-                    <div class="col border border-dark text-center">
-                        In Progress
-                    </div>
-                    <div class="col border border-dark text-center">
-                        Testing
-                    </div>
-                    <div class="col border border-dark text-center">
-                        Done
-                    </div>
-                </div>
-                <div class="row" id="card-row">
-                    <div class="col dragula-container border border-dark">
-                        <ul></ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul></ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul></ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul></ul>
-                    </div>
+                <div class="col" id="top_button">
+                    <button ><strong>+</strong> New Board </button>
                 </div>
             </div>
-        {% endfor %}
-    </body>
-</html>
+            <div class="row" id="main_title_row">
+                <div class="col h-100" id="center_col">
+                    {{ board['title'] }}
+                    <button type="button"> + New Card </button>
+                </div>
+            </div>
+            <div class="row" id="title_row">
+                <div class="col border border-dark text-center">
+                    New
+                </div>
+                <div class="col border border-dark text-center">
+                    In Progress
+                </div>
+                <div class="col border border-dark text-center">
+                    Testing
+                </div>
+                <div class="col border border-dark text-center">
+                    Done
+                </div>
+            </div>
+            <div class="row" id="card-row">
+                <div class="col dragula-container border border-dark">
+                    <ul></ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul></ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul></ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
