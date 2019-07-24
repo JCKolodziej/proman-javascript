@@ -10,8 +10,14 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        new_board_title = request.form['card_title']
-        data_handler.create_new_board(new_board_title)
+        action_type = request.form['hidden']
+        board_title = request.form['board_title']
+        if action_type == 'rename':
+            board_id = request.form['board_id']
+            print(board_id)
+            data_handler.update_board_name(board_id, board_title)
+        else:
+            data_handler.create_new_board(board_title)
         boards = data_handler.get_all_boards()
         return render_template('index.html', boards=boards)
     else:

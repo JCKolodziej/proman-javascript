@@ -33,7 +33,8 @@ def get_cards_for_board(board_id):
 @database_common.connection_handler
 def get_all_boards(cursor):
     cursor.execute("""
-                    SELECT * FROM boards;
+                    SELECT * FROM boards
+                    ORDER BY id;
                     """)
     boards = cursor.fetchall()
     return boards
@@ -45,3 +46,13 @@ def create_new_board(cursor, board_title):
                     INSERT INTO boards (title)
                     VALUES (%(board_title)s)
                     """, {'board_title': board_title})
+
+
+@database_common.connection_handler
+def update_board_name(cursor, board_id, board_title):
+    cursor.execute("""
+                    UPDATE boards
+                    SET title = %(board_title)s
+                    WHERE id = %(board_id)s;
+                    """, {'board_title': board_title,
+                          'board_id': board_id})
