@@ -17,6 +17,14 @@ def index():
             new_card_title = request.form['card_title']
             board_id_for_new_card = request.form['board_id']
             data_handler.create_new_card(new_card_title, board_id_for_new_card)
+        action_type = request.form['hidden']
+        board_title = request.form['board_title']
+        if action_type == 'rename':
+            board_id = request.form['board_id']
+            print(board_id)
+            data_handler.update_board_name(board_id, board_title)
+        else:
+            data_handler.create_new_board(board_title)
         boards = data_handler.get_all_boards()
         cards = []
         for board in boards:

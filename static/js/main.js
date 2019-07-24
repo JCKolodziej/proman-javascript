@@ -8,6 +8,7 @@ function init() {
     // dom.loadBoards();
     addNewBoard();
     addNewCard();
+    renameBoardTitle();
 }
 
 init();
@@ -19,9 +20,11 @@ function addNewBoard() {
 }
 
 function showModal(BoardId) {
+    let hidden = document.getElementById('hidden');
     let modal = document.getElementById('modal_container');
         modal.style.display = 'block';
     document.getElementById('board_id').value = BoardId;
+        hidden.value = 'new';
 }
 
 function cancelModal() {
@@ -44,16 +47,29 @@ function addNewCard() {
     cancelModal();
 }
 
-/*
-*
-var classname = document.getElementsByClassName("classname");
 
-var myFunction = function() {
-    var attribute = this.getAttribute("data-myattribute");
-    alert(attribute);
-};
-
-for (var i = 0; i < classname.length; i++) {
-    classname[i].addEventListener('click', myFunction, false);
+function renameBoardTitle() {
+    let modal = document.getElementById('modal_container');
+    let hidden = document.getElementById('hidden');
+    let renameButton = document.getElementsByClassName('rename');
+    let board_title = document.getElementById('board_title');
+    for (let board of renameButton) {
+        board.addEventListener('click', function (event) {
+        modal.style.display = 'block';
+        board_title.value = event.target.dataset.title;
+        hidden.value = 'rename';
+        let board_id = event.target.dataset.id;
+        createHiddenInput(board_id);
+    })
+    }
 }
-* */
+
+function createHiddenInput(value) {
+    let input = document.createElement('input');
+    let form = document.getElementById('board_form');
+    input.type = 'hidden';
+    input.value = value;
+    input.name = 'board_id';
+    input.id = 'board_id';
+    form.appendChild(input);
+}
