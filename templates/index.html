@@ -16,6 +16,10 @@
     </head>
     <body>
         <h1>ProMan</h1>
-        <div id="boards">Boards are loading...</div>
+        <div id="boards">
+            {% for board in boards %}
+                {{ board }}
+            {% endfor %}
+        </div>
     </body>
 </html>
