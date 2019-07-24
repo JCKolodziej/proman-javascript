@@ -7,7 +7,7 @@
                 <div class="col">
                     <h2>ProMan</h2>
                 </div>
-                <div class="col" id="top_button">
+                <div class="col" id="addNewBoardBtn">
                     <button ><strong>+</strong> New Board </button>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <div class="row" id="main_title_row">
                     <div class="col h-100" id="center_col">
                         {{ board['title'] }}
-                        <button type="button"> + New Card </button>
+                        <button type="button" class="addNewCardBtn" data-board-id = {{ board['id'] }}> Create New Card </button>
                     </div>
                 </div>
                 <div class="row" id="title_row">
