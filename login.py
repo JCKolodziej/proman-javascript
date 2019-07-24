@@ -1,4 +1,4 @@
-import database_common, bcrypt, psycopg2
+import database_common, bcrypt
 
 
 def hash_password(plain_text_password):
