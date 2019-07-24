@@ -33,3 +33,11 @@ body{
 #card-row{
     height: 68%;
 }
+
+#modal_container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}

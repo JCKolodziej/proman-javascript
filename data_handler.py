@@ -37,3 +37,11 @@ def get_all_boards(cursor):
                     """)
     boards = cursor.fetchall()
     return boards
+
+
+@database_common.connection_handler
+def create_new_board(cursor, board_title):
+    cursor.execute("""
+                    INSERT INTO boards (title)
+                    VALUES (%(board_title)s)
+                    """, {'board_title': board_title})

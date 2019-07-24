@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from util import json_response
 
 import data_handler
@@ -6,10 +6,16 @@ import data_handler
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    boards = data_handler.get_all_boards()
-    return render_template('index.html', boards=boards)
+    if request.method == 'POST':
+        new_board_title = request.form['card_title']
+        data_handler.create_new_board(new_board_title)
+        boards = data_handler.get_all_boards()
+        return render_template('index.html', boards=boards)
+    else:
+        boards = data_handler.get_all_boards()
+        return render_template('index.html', boards=boards)
 
 
 @app.route("/get-boards")
