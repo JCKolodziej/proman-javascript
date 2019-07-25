@@ -19,7 +19,7 @@ def index():
         if action_type == 'rename':
             board_id = request.form['board_id']
             data_handler.update_board_name(board_id, board_title)
-        else:
+        elif action_type == 'new':
             data_handler.create_new_board(board_title)
         return redirect('/')
     else:
