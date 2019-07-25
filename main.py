@@ -18,11 +18,19 @@ def index():
         # 	new_card_title = request.form['board_title']
         # 	board_id_for_new_card = request.form['board_id']
         # 	data_handler.create_new_card(new_card_title, board_id_for_new_card)
-        action_type = request.form.get('hidden')
+
+        if request.form['board_id_for_new_card'] != "none":
+            card_title = request.form['card_title']
+            board_id_for_new_card = request.form['board_id_for_new_card']
+            data_handler.create_new_card(card_title, board_id_for_new_card)
+            return redirect('/')
+
+        action_type = request.form['hidden']
         if action_type == 'delete':
             delete_id = request.form['delete_id']
             data_handler.delete_board(delete_id)
             return redirect('/')
+
         board_title = request.form['board_title']
         if action_type == 'rename':
             board_id = request.form['board_id']
@@ -32,7 +40,10 @@ def index():
         return redirect('/')
     else:
         boards = data_handler.get_all_boards()
-        return render_template('index.html', boards=boards)
+        cards = []
+        for board in boards:
+            cards.append(data_handler.get_cards_for_board(board['id']))
+        return render_template('index.html', boards=boards, cards=cards)
 
 
 def delete_board(board_id):

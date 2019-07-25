@@ -113,3 +113,11 @@ input {
     margin-right: 35%;
     border-radius: 40px;
 }
+
+#modal_for_add_card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
