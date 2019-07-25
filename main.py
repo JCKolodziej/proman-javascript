@@ -35,8 +35,6 @@ def index():
         cards = []
         for board in boards:
             cards.append(data_handler.get_cards_for_board(board['id']))
-        print(cards)
-        print(boards)
         return render_template('index.html', boards=boards, cards=cards)
 
 
