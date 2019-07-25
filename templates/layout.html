@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
     <script type="module" src="/static/dragula/dragula.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/static/dragula/dragula.css">
 </head>
 <body>
 {% if session['logged_in'] %}
@@ -44,6 +45,7 @@
 {% endif %}
 
 
+
 {% block content %}
 
 {% endblock %}
@@ -59,5 +61,6 @@
         crossorigin="anonymous"></script>
 
 
+<script type="module" src="/static/dragula/dragula.js" defer></script>
 </body>
 </html>
