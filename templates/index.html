@@ -2,83 +2,116 @@
 
 {% block content %}
 
-        <div class="" id="container">
-            <div class="row">
-                <div class="col">
-                    <h2>ProMan!</h2>
-                </div>
-                <div class="col" id="addNewBoardBtn">
-                    <button ><strong>+</strong> New Board </button>
-                </div>
+{% set board_id = 0 %}
+
+    <div class="" id="container">
+        <div class="row">
+            <div class="col">
+                <h2>ProMan!</h2>
             </div>
-            {% for board in boards %}
-                <div class="row" id="main_title_row">
-                    <div class="col h-100" id="center_col">
-                        {{ board['title'] }}
-                        <button type="button" class="rename" data-id="{{ board['id'] }}"
+            <div class="col" id="addNewBoardBtn">
+                <button><strong>+</strong> New Board</button>
+            </div>
+        </div>
+        {% for index in range(0,boards|length) %}
+            {%  set board = boards[index] %}
+            <div class="row" id="main_title_row">
+                <div class="col h-100" id="center_col">
+                    {{ board['title'] }}
+                    <button type="button" class="rename" data-id="{{ board['id'] }}"
                             data-title="{{ board['title'] }}"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i></button>
-                        <button type="button" class="addNewCardBtn" data-board-id = {{ board['id'] }}> Create New Card </button>
-                    </div>
+                    <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i>
+                    </button>
+                    <button type="button" class="addNewCardBtn" data-board-id= {{ board['id'] }}> Create New Card
+                    </button>
                 </div>
-                <div class="row" id="title_row">
-                    <div class="col border border-dark text-center">
-                        New
-                    </div>
-                    <div class="col border border-dark text-center">
-                        In Progress
-                    </div>
-                    <div class="col border border-dark text-center">
-                        Testing
-                    </div>
-                    <div class="col border border-dark text-center">
-                        Done
-                    </div>
-                </div>
-                <div class="row" id="card-row">
-                    <div class="col dragula-container border border-dark">
-                        <ul class="new">
-                            {% set cards_for_board = cards[board['id'] - 1] %}
-                            {% for card in cards_for_board %}
-                                {% if card['status_id'] == 0 %}
-                                    <li>{{ card['title'] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul class="inprogress">
-                            {% set cards_for_board = cards[board['id'] - 1] %}
-                            {% for card in cards_for_board %}
-                                {% if card['status_id'] == 1 %}
-                                    <li>{{ card['title'] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul class="testing">
-                            {% set cards_for_board = cards[board['id'] - 1] %}
-                            {% for card in cards_for_board %}
-                                {% if card['status_id'] == 2 %}
-                                    <li>{{ card['title'] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="col dragula-container border border-dark">
-                        <ul class="done">
-                            {% set cards_for_board = cards[board['id'] - 1] %}
-                            {% for card in cards_for_board %}
-                                {% if card['status_id'] == 3 %}
-                                    <li>{{ card['title'] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            {% endfor %}
             </div>
+            <div class="row" id="title_row">
+                <div class="col border border-dark text-center">
+                    New
+                </div>
+                <div class="col border border-dark text-center">
+                    In Progress
+                </div>
+                <div class="col border border-dark text-center">
+                    Testing
+                </div>
+                <div class="col border border-dark text-center">
+                    Done
+                </div>
+            </div>
+            <div class="row" id="card-row">
+                <div class="col dragula-container border border-dark">
+                    <ul class="new">
+                        {% set cards_for_board = cards[index] %}
+                        {% for card in cards_for_board %}
+                            {% if card['status_id'] == 0 %}
+                                <li>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ card['title'] }}</h5>
+                                            <p class="card-text">  </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul class="inprogress">
+                        {% set cards_for_board = cards[index] %}
+                        {% for card in cards_for_board %}
+                            {% if card['status_id'] == 1 %}
+                                <li>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ card['title'] }}</h5>
+                                            <p class="card-text">  </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul class="testing">
+                        {% set cards_for_board = cards[index] %}
+                        {% for card in cards_for_board %}
+                            {% if card['status_id'] == 2 %}
+                                <li>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ card['title'] }}</h5>
+                                            <p class="card-text">  </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col dragula-container border border-dark">
+                    <ul class="done">
+                        {% set cards_for_board = cards[index] %}
+                        {% for card in cards_for_board %}
+                            {% if card['status_id'] == 3 %}
+                                <li>
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ card['title'] }}</h5>
+                                            <p class="card-text">  </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
     {% include 'modal.html' %}
     {% include 'delete_modal.html' %}
