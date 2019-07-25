@@ -60,3 +60,13 @@ def create_new_card(cursor, card_title, board_id_for_new_card):
                    INSERT INTO cards (title, board_id, status_id)
                    VALUES (%(card_title)s, %(board_id)s, 1)
                    """, {'card_title': card_title, 'board_id': board_id_for_new_card})
+
+
+
+@database_common.connection_handler
+def delete_board(cursor, board_id):
+    cursor.execute("""
+                    DELETE FROM boards
+                    WHERE id=%(board_id)s;
+                    """,
+                   {'board_id': board_id})
