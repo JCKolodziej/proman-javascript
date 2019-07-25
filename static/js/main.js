@@ -37,14 +37,17 @@ function cancelModal(modal, button) {
 
 function addNewCard() {
     let newCardButton = document.getElementsByClassName('addNewCardBtn');
+    let CardModal = document.getElementById('modal_for_add_card');
     let runModal = function(){
         let BoardId = this.getAttribute("data-board-id");
-        showModal(BoardId);
+        CardModal.style.display = 'block';
+        document.getElementById('board_id_for_new_card').setAttribute('value', BoardId);
     };
     for (let i = 0; i < newCardButton.length; i++){
         newCardButton[i].addEventListener('click', runModal, false);
     }
-    // cancelModal();
+    cancelModal(CardModal, document.getElementById('cancel_for_card_modal'));
+    displayCard()
 }
 
 
@@ -89,4 +92,22 @@ function deleteBoard() {
         })
     }
     cancelModal(deleteModal, cancelDelete);
+}
+
+function displayCard(){
+    let newColumn = document.getElementsByClassName('new')[0];
+    let inprogressColumn = document.getElementsByClassName('inprogress');
+    let testingColumn = document.getElementsByClassName('testing');
+    let doneColumn = document.getElementsByClassName('done');
+    let cardBody = `
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    `;
+    let cardTemplate = document.createElement('li');
+    cardTemplate.innerHTML = cardBody;
+    newColumn.appendChild(cardTemplate)
 }

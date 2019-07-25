@@ -54,6 +54,8 @@ def update_board_name(cursor, board_id, board_title):
                     WHERE id = %(board_id)s;
                     """, {'board_title': board_title,
                           'board_id': board_id})
+
+
 @database_common.connection_handler
 def create_new_card(cursor, card_title, board_id_for_new_card):
     cursor.execute("""

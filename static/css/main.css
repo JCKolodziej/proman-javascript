@@ -51,3 +51,11 @@ body{
     transform: translate(-50%, -50%);
     display: none;
 }
+
+#modal_for_add_card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
