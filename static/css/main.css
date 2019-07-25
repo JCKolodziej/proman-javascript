@@ -1,6 +1,29 @@
 body{
     min-width: 760px;
     height: 100vw;
+    background: grey;
+}
+
+h2 {
+    text-align: center;
+    background: gold;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+h3 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+button {
+    background: lightgoldenrodyellow;
+    border-radius: 10px;
+}
+
+button:hover {
+    color: white;
+    background: darkgoldenrod;
 }
 
 .container{
@@ -26,6 +49,7 @@ body{
 #title_row{
     height: 10%;
     font-size: 3vw;
+    background: gold;
 }
 
 #addNewBoardBtn{
@@ -34,22 +58,35 @@ body{
 
 #card-row{
     height: 68%;
+    background: gold;
 }
 
-#modal_container {
+#modal_container, #delete_modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
+    border: 1px powderblue solid;
+    background: darkgoldenrod;
+    color: deepskyblue;
+    text-align: center;
+    padding: 5px;
+    font-size: large;
 }
 
-#delete_modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
+input {
+    color: deepskyblue;
+}
+
+.btn {
+    background: lightgoldenrodyellow;
+    border-radius: 10px;
+    color: black;
+}
+
+.btn:hover {
+    background: darkgoldenrod;
 }
 
 #modal_for_add_card {

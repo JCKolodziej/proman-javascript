@@ -71,33 +71,21 @@ def get_cards_for_board(board_id: int):
     return data_handler.get_cards_for_board(board_id)
 
 
-@app.route('/test')
-def test():
-    return render_template('login_test.html')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login_page():
-    return render_template('log.html')
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register_page():
-    return render_template('reg.html')
-
-
 @app.route('/login_process', methods=['GET', 'POST'])
 def login_process():
     if request.method == 'POST':
+        session['error_register'] = False
         username = request.form['usernameLogin']
         password = request.form['passwordLogin']
         if login.login(username, password):
             session['username'] = username
             session['password'] = password
             session['logged_in'] = True
+            session['error_login'] = False
             return redirect(url_for('index'))
         else:
-            return render_template('fail.html')
+            session['error_login'] = True
+            return redirect(url_for('index'))
 
 
 @app.route('/logout')
@@ -105,12 +93,14 @@ def logout():
     session.pop('username', None)
     session.pop('password', None)
     session.pop('logged_in', None)
+    session.pop('error_login')
     return redirect(url_for('index'))
 
 
 @app.route('/registration_process', methods=['GET', 'POST'])
 def register_process():
     if request.method == 'POST':
+        session['error_login'] = False
         username = request.form['usernameRegister']
         password = request.form['passwordRegister']
         if login.register(username, password):
@@ -118,9 +108,11 @@ def register_process():
             session['username'] = username
             session['password'] = password
             session['logged_in'] = True
+            session['error_register'] = False
             return redirect(url_for('index'))
         else:
-            return render_template('fail.html')
+            session['error_register'] = True
+            return redirect(url_for('index'))
 
 
 def main():

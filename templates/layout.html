@@ -27,9 +27,22 @@
 {% else %}
     <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Login</a>
 
-    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+    <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
        data-target="#modalRegisterForm">Register</a>
 {% endif %}
+
+{% if session['error_login'] %}
+    <div class="alert alert-danger" role="alert">
+ Wrong username or password
+</div>
+{% endif %}
+
+{% if session['error_register'] %}
+    <div class="alert alert-danger" role="alert">
+ Username already in use
+</div>
+{% endif %}
+
 
 {% block content %}
 
