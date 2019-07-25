@@ -60,7 +60,7 @@ def update_board_name(cursor, board_id, board_title):
 def create_new_card(cursor, card_title, board_id_for_new_card):
     cursor.execute("""
                    INSERT INTO cards (title, board_id, status_id)
-                   VALUES (%(card_title)s, %(board_id)s, 1)
+                   VALUES (%(card_title)s, %(board_id)s, 0)
                    """, {'card_title': card_title, 'board_id': board_id_for_new_card})
 
 

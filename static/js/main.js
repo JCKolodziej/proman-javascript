@@ -48,7 +48,6 @@ function addNewCard() {
         newCardButton[i].addEventListener('click', runModal, false);
     }
     cancelModal(CardModal, document.getElementById('cancel_for_card_modal'));
-    displayCard()
 }
 
 
@@ -60,9 +59,9 @@ function renameBoardTitle() {
     for (let board of renameButton) {
         board.addEventListener('click', function (event) {
         modal.style.display = 'block';
-        board_title.value = event.target.dataset.title;
+        board_title.value = board.dataset.title;
         hidden.value = 'rename';
-        let board_id = event.target.dataset.id;
+        let board_id = board.dataset.id;
         createHiddenInput(board_id);
     })
     }
@@ -86,8 +85,8 @@ function deleteBoard() {
     let hidden = document.getElementsByClassName('hidden')[1];
     for (let deleteButton of deleteButtons) {
         deleteButton.addEventListener('click', function (event) {
-            hiddenInput.value = event.target.dataset.id;
-            hiddenInput.value = event.target.dataset.id;
+            hiddenInput.value = deleteButton.dataset.id;
+            hiddenInput.value = deleteButton.dataset.id;
             hidden.value = 'delete';
             deleteModal.style.display = 'block';
         })
@@ -95,31 +94,29 @@ function deleteBoard() {
     cancelModal(deleteModal, cancelDelete);
 }
 
-function displayCard(){
-    let newColumn = document.getElementsByClassName('new')[0];
-    let inprogressColumn = document.getElementsByClassName('inprogress');
-    let testingColumn = document.getElementsByClassName('testing');
-    let doneColumn = document.getElementsByClassName('done');
-    let cardBody = `
-<li>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        </li>
-    `;
-    let cardTemplate = document.createElement('ul');
-    cardTemplate.innerHTML = cardBody;
-    newColumn.appendChild(cardTemplate)
-}
+// function displayCard(){
+//     let newColumn = document.getElementsByClassName('new')[0];
+//     let inprogressColumn = document.getElementsByClassName('inprogress');
+//     let testingColumn = document.getElementsByClassName('testing');
+//     let doneColumn = document.getElementsByClassName('done');
+//     let cardBody = `
+//         <div class="card" style="width: 18rem;">
+//             <div class="card-body">
+//                 <h5 class="card-title">Card title</h5>
+//                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//             </div>
+//         </div>
+//     `;
+//     let cardTemplate = document.createElement('li');
+//     cardTemplate.innerHTML = cardBody;
+//     newColumn.appendChild(cardTemplate);
+// }
 
 function loadDragula() {
     $('document').ready(function(){
             let drake = dragula({
         isContainer: function (el) {
-            return el.classList.contains('drag');
+            return el.classList.contains('dragula-container');
         }
     });
     });
