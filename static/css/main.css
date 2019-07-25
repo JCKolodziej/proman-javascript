@@ -49,7 +49,7 @@ button:hover {
 #title_row{
     height: 10%;
     font-size: 3vw;
-    background: gold;
+
 }
 
 #addNewBoardBtn{
@@ -58,7 +58,7 @@ button:hover {
 
 #card-row{
     height: 68%;
-    background: gold;
+
 }
 
 #modal_container, #delete_modal {
@@ -87,4 +87,29 @@ input {
 
 .btn:hover {
     background: darkgoldenrod;
+}
+
+.row {
+    margin: 10px;
+}
+
+.border {
+    background: gold;
+    border-radius: 40px;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.btn-primary {
+    border: none;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+#main_title_row {
+    background: gold;
+    text-align: center;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-radius: 40px;
 }

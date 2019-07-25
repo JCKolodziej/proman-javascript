@@ -5,7 +5,7 @@
         <div class="" id="container">
             <div class="row">
                 <div class="col">
-                    <h2>ProMan</h2>
+                    <h2>ProMan!</h2>
                 </div>
                 <div class="col" id="addNewBoardBtn">
                     <button ><strong>+</strong> New Board </button>
@@ -16,8 +16,8 @@
                     <div class="col h-100" id="center_col">
                         {{ board['title'] }}
                         <button type="button" class="rename" data-id="{{ board['id'] }}"
-                            data-title="{{ board['title'] }}"> Rename board </button>
-                        <button type="button" class="delete" data-id="{{ board['id'] }}">Delete board </button>
+                            data-title="{{ board['title'] }}"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i></button>
                         <button type="button" class="addNewCardBtn" data-board-id = {{ board['id'] }}> Create New Card </button>
                     </div>
                 </div>

@@ -18,20 +18,18 @@ def index():
         # 	new_card_title = request.form['board_title']
         # 	board_id_for_new_card = request.form['board_id']
         # 	data_handler.create_new_card(new_card_title, board_id_for_new_card)
-
-        if request.method == 'POST':
-            action_type = request.form['hidden']
-            if action_type == 'delete':
-                delete_id = request.form['delete_id']
-                data_handler.delete_board(delete_id)
-                return redirect('/')
-            board_title = request.form['board_title']
-            if action_type == 'rename':
-                board_id = request.form['board_id']
-                data_handler.update_board_name(board_id, board_title)
-            elif action_type == 'new':
-                data_handler.create_new_board(board_title)
+        action_type = request.form.get('hidden')
+        if action_type == 'delete':
+            delete_id = request.form['delete_id']
+            data_handler.delete_board(delete_id)
             return redirect('/')
+        board_title = request.form['board_title']
+        if action_type == 'rename':
+            board_id = request.form['board_id']
+            data_handler.update_board_name(board_id, board_title)
+        elif action_type == 'new':
+            data_handler.create_new_board(board_title)
+        return redirect('/')
     else:
         boards = data_handler.get_all_boards()
         return render_template('index.html', boards=boards)

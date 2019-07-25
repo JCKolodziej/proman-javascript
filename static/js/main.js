@@ -56,9 +56,9 @@ function renameBoardTitle() {
     for (let board of renameButton) {
         board.addEventListener('click', function (event) {
         modal.style.display = 'block';
-        board_title.value = event.target.dataset.title;
+        board_title.value = board.dataset.title;
         hidden.value = 'rename';
-        let board_id = event.target.dataset.id;
+        let board_id = board.dataset.id;
         createHiddenInput(board_id);
     })
     }
@@ -82,8 +82,8 @@ function deleteBoard() {
     let hidden = document.getElementsByClassName('hidden')[1];
     for (let deleteButton of deleteButtons) {
         deleteButton.addEventListener('click', function (event) {
-            hiddenInput.value = event.target.dataset.id;
-            hiddenInput.value = event.target.dataset.id;
+            hiddenInput.value = deleteButton.dataset.id;
+            hiddenInput.value = deleteButton.dataset.id;
             hidden.value = 'delete';
             deleteModal.style.display = 'block';
         })
