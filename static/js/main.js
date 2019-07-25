@@ -44,7 +44,7 @@ function addNewCard() {
     for (let i = 0; i < newCardButton.length; i++){
         newCardButton[i].addEventListener('click', runModal, false);
     }
-    cancelModal();
+    // cancelModal();
 }
 
 
