@@ -7,6 +7,7 @@ function init() {
     // loads the boards to the screen
     // dom.loadBoards();
     addNewBoard();
+    addNewCard();
     renameBoardTitle();
     deleteBoard();
 }
@@ -14,7 +15,7 @@ function init() {
 init();
 
 function addNewBoard() {
-    let newBoardButton = document.getElementById('top_button');
+    let newBoardButton = document.getElementById('addNewBoardBtn');
     let modal = document.getElementById('modal_container');
     newBoardButton.addEventListener('click', showModal);
     let cancelButt = document.getElementById('cancel');
@@ -33,6 +34,19 @@ function cancelModal(modal, button) {
         modal.style.display = 'none';
     })
 }
+
+function addNewCard() {
+    let newCardButton = document.getElementsByClassName('addNewCardBtn');
+    let runModal = function(){
+        let BoardId = this.getAttribute("data-board-id");
+        showModal(BoardId);
+    };
+    for (let i = 0; i < newCardButton.length; i++){
+        newCardButton[i].addEventListener('click', runModal, false);
+    }
+    // cancelModal();
+}
+
 
 function renameBoardTitle() {
     let modal = document.getElementById('modal_container');
