@@ -37,16 +37,44 @@
                 </div>
                 <div class="row" id="card-row">
                     <div class="col dragula-container border border-dark">
-                        <ul class="new" data-boardId={{ board['id'] }} ></ul>
+                        <ul class="new">
+                            {% set cards_for_board = cards[board['id'] - 1] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == 0 %}
+                                    <li>{{ card['title'] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                     <div class="col dragula-container border border-dark">
-                        <ul class="inprogress"></ul>
+                        <ul class="inprogress">
+                            {% set cards_for_board = cards[board['id'] - 1] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == 1 %}
+                                    <li>{{ card['title'] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                     <div class="col dragula-container border border-dark">
-                        <ul class="testing"></ul>
+                        <ul class="testing">
+                            {% set cards_for_board = cards[board['id'] - 1] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == 2 %}
+                                    <li>{{ card['title'] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                     <div class="col dragula-container border border-dark">
-                        <ul class="done"></ul>
+                        <ul class="done">
+                            {% set cards_for_board = cards[board['id'] - 1] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == 3 %}
+                                    <li>{{ card['title'] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             {% endfor %}
