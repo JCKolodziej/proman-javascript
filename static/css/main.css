@@ -121,3 +121,7 @@ input {
     transform: translate(-50%, -50%);
     display: none;
 }
+
+ul  {
+    list-style-type:none;
+}
