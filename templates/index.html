@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% set board_id = 0 %}
+    {% set board_id = 0 %}
 
     <div class="" id="container">
         <div class="row">
@@ -14,7 +14,7 @@
             </div>
         </div>
         {% for index in range(0,boards|length) %}
-            {%  set board = boards[index] %}
+            {% set board = boards[index] %}
             <div class="row" id="main_title_row">
                 <div class="col h-100" id="center_col">
                     {{ board['title'] }}
@@ -50,7 +50,7 @@
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ card['title'] }}</h5>
-                                            <p class="card-text">  </p>
+                                            <p class="card-text"></p>
                                         </div>
                                     </div>
                                 </li>
@@ -67,7 +67,7 @@
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ card['title'] }}</h5>
-                                            <p class="card-text">  </p>
+                                            <p class="card-text"></p>
                                         </div>
                                     </div>
                                 </li>
@@ -84,7 +84,7 @@
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ card['title'] }}</h5>
-                                            <p class="card-text">  </p>
+                                            <p class="card-text"></p>
                                         </div>
                                     </div>
                                 </li>
@@ -101,7 +101,7 @@
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ card['title'] }}</h5>
-                                            <p class="card-text">  </p>
+                                            <p class="card-text"></p>
                                         </div>
                                     </div>
                                 </li>

@@ -1,4 +1,5 @@
-import database_common, bcrypt
+import bcrypt
+import database_common
 
 
 def hash_password(plain_text_password):

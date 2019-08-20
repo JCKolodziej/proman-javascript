@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for, request, session, redirect
-from util import json_response
+
 import data_handler
 import login
+import json
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -44,54 +46,32 @@ def delete_board(board_id):
     data_handler.delete_board(board_id)
 
 
-@app.route("/get-boards")
-@json_response
-def get_boards():
-    """
-    All the boards
-    """
-    return data_handler.get_boards()
-
-
-@app.route("/get-cards/<int:board_id>")
-@json_response
-def get_cards_for_board(board_id: int):
-    """
-    All cards that belongs to a board
-    :param board_id: id of the parent board
-    """
-    return data_handler.get_cards_for_board(board_id)
-
-
 @app.route('/login_process', methods=['GET', 'POST'])
 def login_process():
     if request.method == 'POST':
-        session['error_register'] = False
-        username = request.form['usernameLogin']
-        password = request.form['passwordLogin']
+        user = json.loads(request.data)
+        username = user['login']
+        password = user['password']
         if login.login(username, password):
             session['username'] = username
-            session['password'] = password
             session['logged_in'] = True
-            session['error_login'] = False
-            return redirect(url_for('index'))
+            return json.dumps({'success': True})
         else:
             session['error_login'] = True
-            return redirect(url_for('index'))
+            return json.dumps({'success': False})
 
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    session.pop('password', None)
     session.pop('logged_in', None)
-    session.pop('error_login')
     return redirect(url_for('index'))
 
 
 @app.route('/registration_process', methods=['GET', 'POST'])
 def register_process():
     if request.method == 'POST':
+
         session['error_login'] = False
         username = request.form['usernameRegister']
         password = request.form['passwordRegister']

@@ -1,21 +1,22 @@
-import { dom } from "./dom.js";
-
 // This function is to initialize the application
+
+
 function init() {
     // init data
     // dom.init();
     // loads the boards to the screen
     // dom.loadBoards();
-    addNewBoard();
+    addNewBoardHandler();
     addNewCard();
     renameBoardTitle();
     deleteBoard();
-    loadDragula()
+    loadDragula();
+    loginProcess()
 }
 
 init();
 
-function addNewBoard() {
+function addNewBoardHandler() {
     let newBoardButton = document.getElementById('addNewBoardBtn');
     let modal = document.getElementById('modal_container');
     newBoardButton.addEventListener('click', showModal);
@@ -26,8 +27,8 @@ function addNewBoard() {
 function showModal() {
     let hidden = document.getElementsByClassName('hidden')[0];
     let modal = document.getElementById('modal_container');
-        modal.style.display = 'block';
-        hidden.value = 'new';
+    modal.style.display = 'block';
+    hidden.value = 'new';
 }
 
 function cancelModal(modal, button) {
@@ -39,12 +40,12 @@ function cancelModal(modal, button) {
 function addNewCard() {
     let newCardButton = document.getElementsByClassName('addNewCardBtn');
     let CardModal = document.getElementById('modal_for_add_card');
-    let runModal = function(){
+    let runModal = function () {
         let BoardId = this.getAttribute("data-board-id");
         CardModal.style.display = 'block';
         document.getElementById('board_id_for_new_card').setAttribute('value', BoardId);
     };
-    for (let i = 0; i < newCardButton.length; i++){
+    for (let i = 0; i < newCardButton.length; i++) {
         newCardButton[i].addEventListener('click', runModal, false);
     }
     cancelModal(CardModal, document.getElementById('cancel_for_card_modal'));
@@ -58,12 +59,12 @@ function renameBoardTitle() {
     let board_title = document.getElementById('board_title');
     for (let board of renameButton) {
         board.addEventListener('click', function (event) {
-        modal.style.display = 'block';
-        board_title.value = board.dataset.title;
-        hidden.value = 'rename';
-        let board_id = board.dataset.id;
-        createHiddenInput(board_id);
-    })
+            modal.style.display = 'block';
+            board_title.value = board.dataset.title;
+            hidden.value = 'rename';
+            let board_id = board.dataset.id;
+            createHiddenInput(board_id);
+        })
     }
 }
 
@@ -94,32 +95,62 @@ function deleteBoard() {
     cancelModal(deleteModal, cancelDelete);
 }
 
-// function displayCard(){
-//     let newColumn = document.getElementsByClassName('new')[0];
-//     let inprogressColumn = document.getElementsByClassName('inprogress');
-//     let testingColumn = document.getElementsByClassName('testing');
-//     let doneColumn = document.getElementsByClassName('done');
-//     let cardBody = `
-//         <div class="card" style="width: 18rem;">
-//             <div class="card-body">
-//                 <h5 class="card-title">Card title</h5>
-//                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//             </div>
-//         </div>
-//     `;
-//     let cardTemplate = document.createElement('li');
-//     cardTemplate.innerHTML = cardBody;
-//     newColumn.appendChild(cardTemplate);
-// }
 
 function loadDragula() {
-    $('document').ready(function(){
-            let drake = dragula({
-        isContainer: function (el) {
-            return el.classList.contains('dragula-container');
-        }
-    });
+    $('document').ready(function () {
+        let drake = dragula({
+            isContainer: function (el) {
+                return el.classList.contains('dragula-container');
+            }
+        });
     });
 
 }
 
+export function loginProcess() {
+    let loginForm = document.getElementById('loginForm');
+    let submitButton = document.getElementById('loginButton');
+    submitButton.addEventListener("submit", function (event) {
+        event.preventDefault();
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault()
+        })
+    });
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let username = document.getElementById('defaultForm-username');
+        let password = document.getElementById('defaultForm-pass');
+        validationChecker(username.value, password.value)
+    })
+}
+
+
+function validationChecker(login, password) {
+    let validationData = {
+        login: login,
+        password: password
+    };
+    console.log(validationData);
+    fetch('/login_process', {
+        method: 'POST',
+        mode: "same-origin",
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(validationData)
+
+    })
+        .then(response => response.json())
+        .then(validation => {
+            if (validation.success === true) {
+                window.location.replace('/')
+                console.log(validation);
+            } else {
+                let alertBar = document.getElementById('invalidCredentials');
+                console.log(validation);
+                alertBar.style.display = 'block'
+            }
+        })
+}

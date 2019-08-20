@@ -1,4 +1,4 @@
-body{
+body {
     min-width: 760px;
     height: 100vw;
     background: grey;
@@ -26,7 +26,7 @@ button:hover {
     background: darkgoldenrod;
 }
 
-.container{
+.container {
     margin: 5vw auto 5vw auto;
     height: 50vw;
     width: 80%;
@@ -35,28 +35,28 @@ button:hover {
     min-height: 360px;
 }
 
-#main_title_row{
+#main_title_row {
     height: 10%;
     margin: 2% 0 2% 0;
     text-align: left;
     max-height: 50px;
 }
 
-#center_col{
+#center_col {
     padding: 1% 0 1% 0;
 }
 
-#title_row{
+#title_row {
     height: 10%;
     font-size: 3vw;
 
 }
 
-#addNewBoardBtn{
+#addNewBoardBtn {
     text-align: right;
 }
 
-#card-row{
+#card-row {
     height: 68%;
 
 }
@@ -122,8 +122,8 @@ input {
     display: none;
 }
 
-ul  {
-    list-style-type:none;
+ul {
+    list-style-type: none;
 }
 
 .card {
@@ -145,4 +145,9 @@ ul  {
     border-radius: 30px;
 
 
+}
+
+
+#invalidCredentials{
+    display: none;
 }

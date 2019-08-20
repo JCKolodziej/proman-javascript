@@ -1,22 +1,7 @@
-import persistence, database_common
+import database_common
 
 
-def get_card_status(status_id):
-    """
-    Find the first status matching the given id
-    :param status_id:
-    :return: str
-    """
-    statuses = persistence.get_statuses()
-    return next((status['title'] for status in statuses if status['id'] == str(status_id)), 'Unknown')
 
-
-def get_boards():
-    """
-    Gather all boards
-    :return:
-    """
-    return persistence.get_boards(force=True)
 
 @database_common.connection_handler
 def get_cards_for_board(cursor, board_id):
@@ -62,7 +47,6 @@ def create_new_card(cursor, card_title, board_id_for_new_card):
                    INSERT INTO cards (title, board_id, status_id)
                    VALUES (%(card_title)s, %(board_id)s, 0)
                    """, {'card_title': card_title, 'board_id': board_id_for_new_card})
-
 
 
 @database_common.connection_handler
