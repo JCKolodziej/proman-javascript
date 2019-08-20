@@ -151,3 +151,7 @@ ul {
 #invalidCredentials{
     display: none;
 }
+
+#userInUse {
+    display: none;
+}

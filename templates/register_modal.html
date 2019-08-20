@@ -8,25 +8,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ url_for('register_process') }}">
+            <form method="post" id="registerForm">
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
                         <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="text" id="defaultRegister-form" class="form-control validate"
+                        <input type="text" id="defaultRegister-username" class="form-control validate"
                                name="usernameRegister">
-                        <label data-error="wrong" data-success="right" for="defaultForm-username">Your username</label>
+                        <label for="defaultRegister-username">Your username</label>
                     </div>
 
                     <div class="md-form mb-4">
                         <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="defaultRegister-form" class="form-control validate"
+                        <input type="password" id="defaultRegister-password" class="form-control validate"
                                name="passwordRegister">
-                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+                        <label for="defaultRegister-pass">Your password</label>
+
+                    </div>
+                     <div class="alert alert-danger" role="alert" id="userInUse">
+                        Username already in use!
                     </div>
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-default" type="submit">Register</button>
+                    <button class="btn btn-default" type="submit" id="registerButton">Register</button>
                 </div>
             </form>
         </div>

@@ -57,7 +57,6 @@ def login_process():
             session['logged_in'] = True
             return json.dumps({'success': True})
         else:
-            session['error_login'] = True
             return json.dumps({'success': False})
 
 
@@ -68,23 +67,20 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/registration_process', methods=['GET', 'POST'])
+@app.route('/register_process', methods=['GET', 'POST'])
 def register_process():
     if request.method == 'POST':
+        user = json.loads(request.data)
 
-        session['error_login'] = False
-        username = request.form['usernameRegister']
-        password = request.form['passwordRegister']
+        username = user['login']
+        password = user['password']
         if login.register(username, password):
             login.login(username, password)
             session['username'] = username
-            session['password'] = password
             session['logged_in'] = True
-            session['error_register'] = False
-            return redirect(url_for('index'))
+            return json.dumps({'success': True})
         else:
-            session['error_register'] = True
-            return redirect(url_for('index'))
+            return json.dumps({'success': 'in_use'})
 
 
 def main():
