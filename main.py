@@ -16,7 +16,8 @@ def index():
         if card_request:
             card_title = request.form['card_title']
             board_id_for_new_card = request.form['board_id_for_new_card']
-            data_handler.create_new_card(card_title, board_id_for_new_card)
+            new_card_status = data_handler.get_statuses_for_given_board_id(board_id_for_new_card)
+            data_handler.create_new_card(card_title, board_id_for_new_card, new_card_status[0]['id'])
             return redirect('/')
 
         column_request = request.form.get('board_id_for_new_column')
