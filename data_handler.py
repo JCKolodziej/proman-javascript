@@ -1,8 +1,6 @@
 import database_common
 
 
-
-
 @database_common.connection_handler
 def get_cards_for_board(cursor, board_id):
     cursor.execute("""
@@ -14,13 +12,25 @@ def get_cards_for_board(cursor, board_id):
 
 
 @database_common.connection_handler
-def get_all_boards(cursor):
+def get_all_public_boards(cursor):
     cursor.execute("""
                     SELECT * FROM boards
+                    WHERE user_id  is null 
                     ORDER BY id;
                     """)
     boards = cursor.fetchall()
     return boards
+
+
+@database_common.connection_handler
+def get_private_boards(cursor, user_id):
+    cursor.execute('''
+                    SELECT * FROM boards
+                    WHERE user_id = %(user)s
+                    ORDER BY is;
+                    ''', {'user': user_id})
+    private_boards = cursor.fetchall()
+    return private_boards
 
 
 @database_common.connection_handler
