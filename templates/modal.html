@@ -10,12 +10,23 @@
 </div>
 
 <div id="modal_for_add_card">
-    <span id="modal_card_title">Enter board title</span>
+    <span id="modal_card_title">Enter card title</span>
     <form action="/" method="post" id="card_form">
         <label for="card_title">Title: </label>
         <input id="card_title" name="card_title">
         <input type="hidden" id="board_id_for_new_card" name="board_id_for_new_card" value="none">
         <button type="submit">Send</button>
         <button type="button" id="cancel_for_card_modal">Cancel</button>
+    </form>
+</div>
+
+<div id="modal_for_add_column">
+    <span id="modal_column_title">Enter column title</span>
+    <form action="/" method="post" id="column_form">
+        <label for="column_title">Title: </label>
+        <input id="column_title" name="column_title">
+        <input type="hidden" id="board_id_for_new_column" name="board_id_for_new_column" value="none">
+        <button type="submit">Send</button>
+        <button type="button" id="cancel_for_column_modal">Cancel</button>
     </form>
 </div>

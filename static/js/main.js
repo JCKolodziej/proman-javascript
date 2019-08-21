@@ -1,22 +1,23 @@
+import { dom } from "./dom.js";
+
 // This function is to initialize the application
-
-
 function init() {
     // init data
     // dom.init();
     // loads the boards to the screen
     // dom.loadBoards();
-    addNewBoardHandler();
+    addNewBoard();
     addNewCard();
     renameBoardTitle();
     deleteBoard();
     loadDragula();
-    loginProcess()
+    loginProcess();
+    addNewColumn();
 }
 
 init();
 
-function addNewBoardHandler() {
+function addNewBoard() {
     let newBoardButton = document.getElementById('addNewBoardBtn');
     let modal = document.getElementById('modal_container');
     newBoardButton.addEventListener('click', showModal);
@@ -27,8 +28,8 @@ function addNewBoardHandler() {
 function showModal() {
     let hidden = document.getElementsByClassName('hidden')[0];
     let modal = document.getElementById('modal_container');
-    modal.style.display = 'block';
-    hidden.value = 'new';
+        modal.style.display = 'block';
+        hidden.value = 'new';
 }
 
 function cancelModal(modal, button) {
@@ -40,17 +41,31 @@ function cancelModal(modal, button) {
 function addNewCard() {
     let newCardButton = document.getElementsByClassName('addNewCardBtn');
     let CardModal = document.getElementById('modal_for_add_card');
-    let runModal = function () {
+    let runModalForNewCard = function(){
         let BoardId = this.getAttribute("data-board-id");
         CardModal.style.display = 'block';
         document.getElementById('board_id_for_new_card').setAttribute('value', BoardId);
     };
-    for (let i = 0; i < newCardButton.length; i++) {
-        newCardButton[i].addEventListener('click', runModal, false);
+    for (let i = 0; i < newCardButton.length; i++){
+        newCardButton[i].addEventListener('click', runModalForNewCard, false);
     }
     cancelModal(CardModal, document.getElementById('cancel_for_card_modal'));
 }
 
+function addNewColumn() {
+    let newColumnButton = document.getElementsByClassName('addNewColumnBtn');
+    let ColumnModal = document.getElementById('modal_for_add_column');
+    let runModalForNewColumn = function(){
+        let BoardIdForNewColumn = this.getAttribute("data-board-id");
+        console.log(BoardIdForNewColumn);
+        ColumnModal.style.display = 'block';
+        document.getElementById('board_id_for_new_column').setAttribute('value', BoardIdForNewColumn);
+    };
+    for (let i = 0; i < newColumnButton.length; i++){
+        newColumnButton[i].addEventListener('click', runModalForNewColumn , false);
+    }
+    cancelModal(ColumnModal, document.getElementById('cancel_for_column_modal'));
+}
 
 function renameBoardTitle() {
     let modal = document.getElementById('modal_container');
@@ -145,7 +160,7 @@ function validationChecker(login, password) {
         .then(response => response.json())
         .then(validation => {
             if (validation.success === true) {
-                window.location.replace('/')
+                window.location.replace('/');
                 console.log(validation);
             } else {
                 let alertBar = document.getElementById('invalidCredentials');
