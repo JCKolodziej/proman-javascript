@@ -8,8 +8,10 @@
                 <h2>ProMan!</h2>
             </div>
             <div class="col" id="addNewBoardBtn">
+
                 <button><strong>+</strong> New Board</button>
             </div>
+{#            TODO render private and public boards according to lists #}
         </div>
         {% for index in range(0,boards|length) %}
             {% set board = boards[index] %}

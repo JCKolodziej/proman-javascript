@@ -115,11 +115,12 @@ function deleteBoard() {
 
 function loadDragula() {
     $('document').ready(function () {
-        let drake = dragula({
+        dragula({
             isContainer: function (el) {
                 return el.classList.contains('dragula-container');
             }
         });
+
     });
 
 }
@@ -197,3 +198,4 @@ function registrationProcess() {
         validationChecker(user.value, pass.value, url)
     })
 }
+

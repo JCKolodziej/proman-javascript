@@ -48,11 +48,17 @@ def index():
             return redirect('/')
         return redirect('/')
     else:
-        boards = data_handler.get_all_boards()
+        user_id = session['user_id']
+        boards = data_handler.get_all_public_boards()
+        private_boards = data_handler.get_private_boards(user_id)
         cards = []
+        private_cards = []
         statuses = []
         for board in boards:
             cards.append(data_handler.get_cards_for_board(board['id']))
+        for private in private_boards:
+            private_cards.append(data_handler.get_cards_for_board(private['id']))
+        return render_template('index.html', boards=boards, cards=cards, private_boards=private_boards, private_cards=private_cards)
             statuses.append(data_handler.get_statuses_for_given_board_id(board['id']))
         return render_template('index.html', boards=boards, cards=cards, statuses=statuses)
 
@@ -67,8 +73,10 @@ def login_process():
         user = json.loads(request.data)
         username = user['login']
         password = user['password']
-        if login.login(username, password):
+        user_id = login.login(username, password)
+        if user_id:
             session['username'] = username
+            session['user_id'] = user_id
             session['logged_in'] = True
             return json.dumps({'success': True})
         else:
@@ -79,6 +87,7 @@ def login_process():
 def logout():
     session.pop('username', None)
     session.pop('logged_in', None)
+    session.pop('user_id', None)
     return redirect(url_for('index'))
 
 

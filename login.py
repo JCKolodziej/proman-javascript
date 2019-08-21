@@ -33,13 +33,15 @@ def login(cursor, login, password):
     all_logins = get_logins()
     if login in all_logins:
         cursor.execute('''
-                        SELECT password FROM users
+                        SELECT password, id FROM users
                         WHERE login = %(login)s
                         ''',
                        {'login': login})
-        hashed_password = cursor.fetchall()[0]['password']
+        user_credentials = cursor.fetchall()
+        hashed_password = user_credentials[0]['password']
+        user_id = user_credentials[0]['id']
         if verify_password(password, hashed_password):
-            return True
+            return user_id
         else:
             return False
 
@@ -54,3 +56,4 @@ def get_logins(cursor):
     for dict in login_list:
         all_users_login.append(dict['login'])
     return all_users_login
+
