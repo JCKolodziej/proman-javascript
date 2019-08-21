@@ -19,6 +19,19 @@ def index():
             data_handler.create_new_card(card_title, board_id_for_new_card)
             return redirect('/')
 
+        column_request = request.form.get('board_id_for_new_column')
+        if column_request:
+            new_column_title = request.form['column_title']
+            board_id_for_new_column = request.form['board_id_for_new_column']
+            # checking for existing statues title
+            all_statuses = data_handler.get_all_statuses()
+            if new_column_title not in all_statuses:
+                data_handler.insert_new_status_title(new_column_title)
+
+            new_status_id = data_handler.get_status_id_by_title(new_column_title)
+            data_handler.insert_new_board_status(board_id_for_new_column, new_status_id[0]['id'])
+            return redirect('/')
+
         action_type = request.form['hidden']
         if action_type == 'delete':
             delete_id = request.form['delete_id']
@@ -37,9 +50,11 @@ def index():
     else:
         boards = data_handler.get_all_boards()
         cards = []
+        statuses = []
         for board in boards:
             cards.append(data_handler.get_cards_for_board(board['id']))
-        return render_template('index.html', boards=boards, cards=cards)
+            statuses.append(data_handler.get_statuses_for_given_board_id(board['id']))
+        return render_template('index.html', boards=boards, cards=cards, statuses=statuses)
 
 
 def delete_board(board_id):
