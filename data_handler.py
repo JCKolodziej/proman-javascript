@@ -73,10 +73,13 @@ def create_new_card(cursor, card_title, board_id_for_new_card, status_id):
 @database_common.connection_handler
 def delete_board(cursor, board_id):
     cursor.execute("""
-                    DELETE FROM boards
-                    WHERE id=%(board_id)s;
-                    """,
-                   {'board_id': board_id})
+                   DELETE FROM boards_statuses
+                   WHERE board_id=%(board_id)s;
+                   """, {'board_id': board_id})
+    cursor.execute("""
+                   DELETE FROM boards
+                   WHERE id=%(board_id)s;
+                   """, {'board_id': board_id})
 
 
 @database_common.connection_handler
