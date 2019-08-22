@@ -27,12 +27,16 @@
                 <div class="col h-100" id="center_col">
                     {{ private['title'] }}
                     <button type="button" class="rename" data-id="{{ private['id'] }}"
-                            data-title="{{ private['title'] }}"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="delete" data-id="{{ private['id'] }}"><i class="fa fa-trash"></i>
+                            data-title="{{ private['title'] }}">
+                        <i class="fa fa-edit" title="Change Board Title"></i></button>
+                    <button type="button" class="delete" data-id="{{ private['id'] }}">
+                        <i class="fa fa-trash" title="Delete Board"></i>
                     </button>
-                    <button type="button" class="addNewCardBtn" data-board-id= {{ private['id'] }}> Create New Card
+                    <button type="button" class="addNewCardBtn" data-board-id= {{ private['id'] }}>
+                        <i class="fa fa-inbox" title="Add New Card"></i>
                     </button>
-                    <button type="button" class="addNewColumnBtn" data-board-id= {{ private['id'] }}> Create New Column
+                    <button type="button" class="addNewColumnBtn" data-board-id= {{ private['id'] }}>
+                        <i class="fa fa-map-o" title="Add New Column"></i>
                     </button>
                 </div>
             </div>
@@ -81,12 +85,16 @@
                 <div class="col h-100" id="center_col">
                     {{ board['title'] }}
                     <button type="button" class="rename" data-id="{{ board['id'] }}"
-                            data-title="{{ board['title'] }}"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i>
+                            data-title="{{ board['title'] }}">
+                        <i class="fa fa-edit" title="Change Board Title"></i></button>
+                    <button type="button" class="delete" data-id="{{ board['id'] }}">
+                        <i class="fa fa-trash" title="Delete Board"></i>
                     </button>
-                    <button type="button" class="addNewCardBtn" data-board-id= {{ board['id'] }}> Create New Card
+                    <button type="button" class="addNewCardBtn" data-board-id= {{ board['id'] }}>
+                        <i class="fa fa-inbox" title="Add New Card"></i>
                     </button>
-                    <button type="button" class="addNewColumnBtn" data-board-id= {{ board['id'] }}> Create New Column
+                    <button type="button" class="addNewColumnBtn" data-board-id= {{ board['id'] }}>
+                        <i class="fa fa-map-o" title="Add New Column"></i>
                     </button>
                 </div>
             </div>
