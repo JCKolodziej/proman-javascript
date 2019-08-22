@@ -8,9 +8,7 @@
                 <h2>ProMan!</h2>
             </div>
             <div class="col" id="addNewBoardBtn">
-
                 <button><strong>+</strong> New Board</button>
-
             </div>
             {% if session %}
             <div class="col" >
@@ -42,7 +40,7 @@
 
 
             <div class="row" id="title_row">
-                {% for status in statuses[index] %}
+                {% for status in private_statuses[index] %}
                     <div class="col border border-dark text-center">
                         {{ status['title'] }}
                     </div>
@@ -50,7 +48,7 @@
             </div>
             <div class="row" id="card-row">
 
-                {% for status in statuses[index] %}
+                {% for status in private_statuses[index] %}
                     <div class="col border border-dark dragula-container">
                         <ul class={{ status['title'] }}>
                             {% set cards_for_board = private_cards[index] %}
