@@ -113,7 +113,7 @@ function deleteBoard() {
     let deleteModal = document.getElementById('delete_modal');
     let hiddenInput = document.getElementById('delete_id');
     let cancelDelete = document.getElementById('cancel_delete');
-    let hidden = document.getElementsByClassName('hidden')[1];
+    let hidden = document.getElementsByClassName('hiddenDelete')[0];
     for (let deleteButton of deleteButtons) {
         deleteButton.addEventListener('click', function (event) {
             hiddenInput.value = deleteButton.dataset.id;
