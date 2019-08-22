@@ -15,7 +15,6 @@ function init() {
     registrationProcess();
     addNewColumn();
     addNewPrivateBoard();
-
 }
 
 init();
