@@ -1,4 +1,5 @@
 import bcrypt
+
 import database_common
 
 
@@ -62,5 +63,3 @@ def get_logins(cursor):
     for dict in login_list:
         all_users_login.append(dict['login'])
     return all_users_login
-
-
