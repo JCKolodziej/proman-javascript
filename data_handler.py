@@ -16,7 +16,7 @@ def get_all_public_boards(cursor):
     cursor.execute("""
                     SELECT * FROM boards
                     WHERE user_id  is null 
-                    ORDER BY id;
+                    ORDER BY id
                     """)
     boards = cursor.fetchall()
     return boards
@@ -27,7 +27,7 @@ def get_private_boards(cursor, user_id):
     cursor.execute('''
                     SELECT * FROM boards
                     WHERE user_id = %(user)s
-                    ORDER BY is;
+                    ORDER BY id
                     ''', {'user': user_id})
     private_boards = cursor.fetchall()
     return private_boards
@@ -39,6 +39,17 @@ def create_new_board(cursor, board_title):
                     INSERT INTO boards (title)
                     VALUES (%(board_title)s)
                     """, {'board_title': board_title})
+
+
+@database_common.connection_handler
+def create_new_private_board(cursor, board_title, user_id):
+    cursor.execute('''
+                    INSERT INTO boards (title, user_id)
+                    VALUES (%(board_title)s, %(user_id)s)
+                    ''', {
+        'board_title': board_title,
+        'user_id': user_id
+    })
 
 
 @database_common.connection_handler
@@ -67,6 +78,7 @@ def delete_board(cursor, board_id):
                     """,
                    {'board_id': board_id})
 
+
 @database_common.connection_handler
 def get_all_statuses(cursor):
     cursor.execute("""
@@ -75,12 +87,14 @@ def get_all_statuses(cursor):
     statues = cursor.fetchall()
     return statues
 
+
 @database_common.connection_handler
 def insert_new_status_title(cursor, new_status_title):
     cursor.execute("""
                    INSERT INTO statuses(title)
                    VALUES (%(title)s)
                    """, {'title': new_status_title})
+
 
 @database_common.connection_handler
 def get_status_id_by_title(cursor, title):
@@ -90,12 +104,14 @@ def get_status_id_by_title(cursor, title):
     status_id = cursor.fetchall()
     return status_id
 
+
 @database_common.connection_handler
 def insert_new_board_status(cursor, board_id, status_id):
     cursor.execute("""
                    INSERT INTO boards_statuses(board_id, status_id)
                    VALUES (%(board_id)s, %(status_id)s)
                    """, {'board_id': board_id, 'status_id': status_id})
+
 
 @database_common.connection_handler
 def get_statuses_for_given_board_id(cursor, board_id):

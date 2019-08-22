@@ -1,4 +1,3 @@
-import { dom } from "./dom.js";
 
 // This function is to initialize the application
 function init() {
@@ -7,14 +6,15 @@ function init() {
     // loads the boards to the screen
     // dom.loadBoards();
     addNewBoard();
+
     addNewCard();
     renameBoardTitle();
     deleteBoard();
     loadDragula();
     loginProcess();
     registrationProcess();
-    loginProcess();
     addNewColumn();
+    addNewPrivateBoard();
 }
 
 init();
@@ -25,6 +25,19 @@ function addNewBoard() {
     newBoardButton.addEventListener('click', showModal);
     let cancelButt = document.getElementById('cancel');
     cancelModal(modal, cancelButt);
+}
+
+
+function addNewPrivateBoard() {
+    let newPrivateBoardButton = document.getElementById('addNewPrivateBoardBtn');
+    let privateModal = document.getElementById('private_modal');
+    newPrivateBoardButton.addEventListener("click", function () {
+        privateModal.style.display = 'block';
+        let hiddenInput = document.getElementById('privateHidden');
+        hiddenInput.setAttribute('value', 'private')
+    });
+    let cancelButton = document.getElementById('cancelPrivate');
+    cancelModal(privateModal, cancelButton)
 }
 
 function showModal() {

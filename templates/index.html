@@ -10,39 +10,36 @@
             <div class="col" id="addNewBoardBtn">
 
                 <button><strong>+</strong> New Board</button>
+
             </div>
-{#            TODO render private and public boards according to lists #}
+            {% if session %}
+            <div class="col" >
+
+                <button id="addNewPrivateBoardBtn"><strong>+</strong> New Private Board</button>
+
+            </div>
+            {% endif %}
         </div>
-        {% for index in range(0,boards|length) %}
-            {% set board = boards[index] %}
+
+        {#    PRIVATE BOARDS    #}
+
+        {% for index in range(0,private_boards|length) %}
+            {% set private = private_boards[index] %}
             <div class="row" id="main_title_row">
                 <div class="col h-100" id="center_col">
-                    {{ board['title'] }}
-                    <button type="button" class="rename" data-id="{{ board['id'] }}"
-                            data-title="{{ board['title'] }}"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i>
+                    {{ private['title'] }}
+                    <button type="button" class="rename" data-id="{{ private['id'] }}"
+                            data-title="{{ private['title'] }}"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="delete" data-id="{{ private['id'] }}"><i class="fa fa-trash"></i>
                     </button>
-                    <button type="button" class="addNewCardBtn" data-board-id = {{ board['id'] }}> Create New Card
+                    <button type="button" class="addNewCardBtn" data-board-id= {{ private['id'] }}> Create New Card
                     </button>
-                    <button type="button" class="addNewColumnBtn" data-board-id = {{ board['id'] }}> Create New Column
+                    <button type="button" class="addNewColumnBtn" data-board-id= {{ private['id'] }}> Create New Column
                     </button>
                 </div>
             </div>
 
-{#            <div class="row" id="title_row">#}
-{#                <div class="col border border-dark text-center">#}
-{#                    New#}
-{#                </div>#}
-{#                <div class="col border border-dark text-center">#}
-{#                    In Progress#}
-{#                </div>#}
-{#                <div class="col border border-dark text-center">#}
-{#                    Testing#}
-{#                </div>#}
-{#                <div class="col border border-dark text-center">#}
-{#                    Done#}
-{#                </div>#}
-{#            </div>#}
+
 
             <div class="row" id="title_row">
                 {% for status in statuses[index] %}
@@ -54,93 +51,79 @@
             <div class="row" id="card-row">
 
                 {% for status in statuses[index] %}
-                <div class="col border border-dark dragula-container">
-                    <ul class={{ status['title'] }}>
-                        {% set cards_for_board = cards[index] %}
-                        {% for card in cards_for_board %}
-                            {% if card['status_id'] == status['id'] %}
-                                <li class=" dragula-container">
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ card['title'] }}</h5>
-                                            <p class="card-text"></p>
+                    <div class="col border border-dark dragula-container">
+                        <ul class={{ status['title'] }}>
+                            {% set cards_for_board = private_cards[index] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == status['id'] %}
+                                    <li class=" dragula-container">
+                                        <div class="card" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ card['title'] }}</h5>
+                                                <p class="card-text"></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endfor %}
 
-{#                <div class="col border border-dark dragula-container">#}
-{#                    <ul class="new">#}
-{#                        {% set cards_for_board = cards[index] %}#}
-{#                        {% for card in cards_for_board %}#}
-{#                            {% if card['status_id'] == 0 %}#}
-{#                                <li class=" dragula-container">#}
-{#                                    <div class="card" style="width: 18rem;">#}
-{#                                        <div class="card-body">#}
-{#                                            <h5 class="card-title">{{ card['title'] }}</h5>#}
-{#                                            <p class="card-text"></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                </div>#}
-{#                <div class="col border border-dark dragula-container">#}
-{#                    <ul class="inprogress">#}
-{#                        {% set cards_for_board = cards[index] %}#}
-{#                        {% for card in cards_for_board %}#}
-{#                            {% if card['status_id'] == 1 %}#}
-{#                                <li class="dragula-container">#}
-{#                                    <div class="card" style="width: 18rem;">#}
-{#                                        <div class="card-body">#}
-{#                                            <h5 class="card-title">{{ card['title'] }}</h5>#}
-{#                                            <p class="card-text"></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                </div>#}
-{#                <div class="col border border-dark  dragula-container">#}
-{#                    <ul class="testing">#}
-{#                        {% set cards_for_board = cards[index] %}#}
-{#                        {% for card in cards_for_board %}#}
-{#                            {% if card['status_id'] == 2 %}#}
-{#                                <li class=" dragula-container">#}
-{#                                    <div class="card" style="width: 18rem;">#}
-{#                                        <div class="card-body">#}
-{#                                            <h5 class="card-title">{{ card['title'] }}</h5>#}
-{#                                            <p class="card-text"></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                </div>#}
-{#                <div class="col border border-dark dragula-container">#}
-{#                    <ul class="done">#}
-{#                        {% set cards_for_board = cards[index] %}#}
-{#                        {% for card in cards_for_board %}#}
-{#                            {% if card['status_id'] == 3 %}#}
-{#                                <li class=" dragula-container">#}
-{#                                    <div class="card" style="width: 18rem;">#}
-{#                                        <div class="card-body">#}
-{#                                            <h5 class="card-title">{{ card['title'] }}</h5>#}
-{#                                            <p class="card-text"></p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                </div>#}
+
+            </div>
+        {% endfor %}
+
+        {#  PUBLIC BOARDS  #}
+
+        {% for index in range(0,boards|length) %}
+            {% set board = boards[index] %}
+            <div class="row" id="main_title_row">
+                <div class="col h-100" id="center_col">
+                    {{ board['title'] }}
+                    <button type="button" class="rename" data-id="{{ board['id'] }}"
+                            data-title="{{ board['title'] }}"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="delete" data-id="{{ board['id'] }}"><i class="fa fa-trash"></i>
+                    </button>
+                    <button type="button" class="addNewCardBtn" data-board-id= {{ board['id'] }}> Create New Card
+                    </button>
+                    <button type="button" class="addNewColumnBtn" data-board-id= {{ board['id'] }}> Create New Column
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class="row" id="title_row">
+                {% for status in statuses[index] %}
+                    <div class="col border border-dark text-center">
+                        {{ status['title'] }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row" id="card-row">
+
+                {% for status in statuses[index] %}
+                    <div class="col border border-dark dragula-container">
+                        <ul class={{ status['title'] }}>
+                            {% set cards_for_board = cards[index] %}
+                            {% for card in cards_for_board %}
+                                {% if card['status_id'] == status['id'] %}
+                                    <li class=" dragula-container">
+                                        <div class="card" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ card['title'] }}</h5>
+                                                <p class="card-text"></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+
+
             </div>
         {% endfor %}
     </div>
