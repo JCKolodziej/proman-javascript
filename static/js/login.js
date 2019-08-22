@@ -8,13 +8,10 @@ export function loginProcess() {
         console.log(login, password);
         validationChecker(login, password)
     });
-    }
+}
 
 
-
-
-
-function validationChecker(login, password){
+function validationChecker(login, password) {
     let validationData = {
         login: login,
         password: password
@@ -29,12 +26,11 @@ function validationChecker(login, password){
         body: JSON.stringify(validationData)
 
     })
-        .then(response =>response.json())
+        .then(response => response.json())
         .then(validation => {
-            if (validation.success === true){
+            if (validation.success === true) {
                 window.location.replace('/')
-            }
-            else {
+            } else {
                 let alertBar = document.getElementById('invalidCredentials');
                 alertBar.style.display = 'block'
             }

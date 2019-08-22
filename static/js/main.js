@@ -1,4 +1,3 @@
-
 // This function is to initialize the application
 function init() {
     // init data
@@ -43,8 +42,8 @@ function addNewPrivateBoard() {
 function showModal() {
     let hidden = document.getElementsByClassName('hidden')[0];
     let modal = document.getElementById('modal_container');
-        modal.style.display = 'block';
-        hidden.value = 'new';
+    modal.style.display = 'block';
+    hidden.value = 'new';
 }
 
 function cancelModal(modal, button) {
@@ -56,12 +55,12 @@ function cancelModal(modal, button) {
 function addNewCard() {
     let newCardButton = document.getElementsByClassName('addNewCardBtn');
     let CardModal = document.getElementById('modal_for_add_card');
-    let runModalForNewCard = function(){
+    let runModalForNewCard = function () {
         let BoardId = this.getAttribute("data-board-id");
         CardModal.style.display = 'block';
         document.getElementById('board_id_for_new_card').setAttribute('value', BoardId);
     };
-    for (let i = 0; i < newCardButton.length; i++){
+    for (let i = 0; i < newCardButton.length; i++) {
         newCardButton[i].addEventListener('click', runModalForNewCard, false);
     }
     cancelModal(CardModal, document.getElementById('cancel_for_card_modal'));
@@ -70,13 +69,13 @@ function addNewCard() {
 function addNewColumn() {
     let newColumnButton = document.getElementsByClassName('addNewColumnBtn');
     let ColumnModal = document.getElementById('modal_for_add_column');
-    let runModalForNewColumn = function(){
+    let runModalForNewColumn = function () {
         let BoardIdForNewColumn = this.getAttribute("data-board-id");
         ColumnModal.style.display = 'block';
         document.getElementById('board_id_for_new_column').setAttribute('value', BoardIdForNewColumn);
     };
-    for (let i = 0; i < newColumnButton.length; i++){
-        newColumnButton[i].addEventListener('click', runModalForNewColumn , false);
+    for (let i = 0; i < newColumnButton.length; i++) {
+        newColumnButton[i].addEventListener('click', runModalForNewColumn, false);
     }
     cancelModal(ColumnModal, document.getElementById('cancel_for_column_modal'));
 }
@@ -100,12 +99,12 @@ function renameBoardTitle() {
 function renameColumnTitle() {
     let modal = document.getElementById('modal_for_change_column_title');
     let renameColumnButtons = document.getElementsByClassName("NewColumnTitleBtn");
-    let runModalForNewColumnTitle = function(){
+    let runModalForNewColumnTitle = function () {
         let columnId = this.getAttribute("data-status-id");
         modal.style.display = 'block';
         document.getElementById('status_id_for_new_column_title').setAttribute('value', columnId);
     };
-    for(let button of renameColumnButtons){
+    for (let button of renameColumnButtons) {
         button.addEventListener('click', runModalForNewColumnTitle);
     }
     cancelModal(modal, document.getElementById('cancel_for_new_column_title_modal'));
@@ -190,14 +189,13 @@ function validationChecker(login, password, url) {
         .then(validation => {
             if (validation.success === true) {
                 window.location.replace('/');
-            } else if (validation.success === 'in_use'){
+            } else if (validation.success === 'in_use') {
                 let registerAlert = document.getElementById('userInUse');
                 registerAlert.style.display = 'block';
                 setTimeout(function () {
                     registerAlert.style.display = 'none'
                 }, 2500)
-            }
-            else {
+            } else {
                 let alertBar = document.getElementById('invalidCredentials');
                 alertBar.style.display = 'block';
                 setTimeout(function () {

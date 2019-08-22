@@ -125,6 +125,7 @@ def get_statuses_for_given_board_id(cursor, board_id):
                    """, {'board_id': board_id})
     return cursor.fetchall()
 
+
 @database_common.connection_handler
 def rename_status_title(cursor, status_id, status_title):
     cursor.execute("""
