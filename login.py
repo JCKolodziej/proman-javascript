@@ -25,7 +25,13 @@ def register(cursor, new_login, password):
                         ''',
                        {'new_login': new_login,
                         'hashed_password': hashed_password})
-        return True
+        cursor.execute('''
+                        SELECT id FROM users
+                        WHERE login = %(login)s
+                        ''',
+                       {'login': new_login})
+        user_id = cursor.fetchall()[0]['id']
+        return user_id
 
 
 @database_common.connection_handler
@@ -56,4 +62,5 @@ def get_logins(cursor):
     for dict in login_list:
         all_users_login.append(dict['login'])
     return all_users_login
+
 

@@ -60,17 +60,18 @@ def index():
         cards = []
         private_cards = []
         statuses = []
+        private_statuses = []
         if session:
             user_id = session['user_id']
             private_boards = data_handler.get_private_boards(user_id)
             for private in private_boards:
                 private_cards.append(data_handler.get_cards_for_board(private['id']))
-                statuses.append(data_handler.get_statuses_for_given_board_id(private['id']))
+                private_statuses.append(data_handler.get_statuses_for_given_board_id(private['id']))
         for board in boards:
             cards.append(data_handler.get_cards_for_board(board['id']))
             statuses.append(data_handler.get_statuses_for_given_board_id(board['id']))
         return render_template('index.html', boards=boards, cards=cards, statuses=statuses, private_cards=private_cards,
-                               private_boards=private_boards)
+                               private_boards=private_boards, private_statuses=private_statuses)
 
 
 def delete_board(board_id):
@@ -108,10 +109,12 @@ def register_process():
 
         username = user['login']
         password = user['password']
-        if login.register(username, password):
+        user_id = login.register(username, password)
+        if user_id:
             login.login(username, password)
             session['username'] = username
             session['logged_in'] = True
+            session['user_id'] = user_id
             return json.dumps({'success': True})
         else:
             return json.dumps({'success': 'in_use'})
