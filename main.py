@@ -33,6 +33,13 @@ def index():
             data_handler.insert_new_board_status(board_id_for_new_column, new_status_id[0]['id'])
             return redirect('/')
 
+        rename_column_title_request = request.form.get('status_id_for_new_column_title')
+        if rename_column_title_request:
+            renamed_column_title = request.form['new_column_title']
+            status_id_for_new_title = request.form['status_id_for_new_column_title']
+            data_handler.rename_status_title(status_id_for_new_title, renamed_column_title)
+            return redirect('/')
+
         action_type = request.form['hidden']
         if action_type == 'delete':
             delete_id = request.form['delete_id']

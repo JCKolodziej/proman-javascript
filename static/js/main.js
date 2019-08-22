@@ -13,6 +13,7 @@ function init() {
     loadDragula();
     loginProcess();
     addNewColumn();
+    renameColumnTitle();
 }
 
 init();
@@ -57,7 +58,6 @@ function addNewColumn() {
     let ColumnModal = document.getElementById('modal_for_add_column');
     let runModalForNewColumn = function(){
         let BoardIdForNewColumn = this.getAttribute("data-board-id");
-        console.log(BoardIdForNewColumn);
         ColumnModal.style.display = 'block';
         document.getElementById('board_id_for_new_column').setAttribute('value', BoardIdForNewColumn);
     };
@@ -81,6 +81,20 @@ function renameBoardTitle() {
             createHiddenInput(board_id);
         })
     }
+}
+
+function renameColumnTitle() {
+    let modal = document.getElementById('modal_for_change_column_title');
+    let renameColumnButtons = document.getElementsByClassName("NewColumnTitleBtn");
+    let runModalForNewColumnTitle = function(){
+        let columnId = this.getAttribute("data-status-id");
+        modal.style.display = 'block';
+        document.getElementById('status_id_for_new_column_title').setAttribute('value', columnId);
+    };
+    for(let button of renameColumnButtons){
+        button.addEventListener('click', runModalForNewColumnTitle, false);
+    }
+    cancelModal(modal, document.getElementById('cancel_for_new_column_title_modal'));
 }
 
 function createHiddenInput(value) {

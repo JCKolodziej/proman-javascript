@@ -46,6 +46,7 @@
                 {% for status in statuses[index] %}
                     <div class="col border border-dark text-center">
                         {{ status['title'] }}
+                        <button class="NewColumnTitleBtn" type="button" data-status-id={{ status['id'] }}> CHANGE TITLE </button>
                     </div>
                 {% endfor %}
             </div>

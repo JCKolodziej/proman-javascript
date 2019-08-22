@@ -61,7 +61,7 @@ button:hover {
 
 }
 
-#modal_container, #delete_modal, #modal_for_add_card, #modal_for_add_column {
+#modal_container, #delete_modal, #modal_for_add_card, #modal_for_add_column, #modal_for_change_column_title {
     position: fixed;
     top: 50%;
     left: 50%;
