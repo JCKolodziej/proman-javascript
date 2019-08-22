@@ -1,9 +1,9 @@
+import json
+
 from flask import Flask, render_template, url_for, request, session, redirect
 
 import data_handler
 import login
-import json
-
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -54,15 +54,31 @@ def index():
         elif action_type == 'new':
             data_handler.create_new_board(board_title)
             return redirect('/')
+
+        private_type = request.form['privateHidden']
+        if private_type == 'private':
+            user_id = session['user_id']
+            private_title = request.form['private_title']
+            data_handler.create_new_private_board(private_title, user_id)
         return redirect('/')
     else:
-        boards = data_handler.get_all_boards()
+        boards = data_handler.get_all_public_boards()
+        private_boards = {}
         cards = []
+        private_cards = []
         statuses = []
+        private_statuses = []
+        if session:
+            user_id = session['user_id']
+            private_boards = data_handler.get_private_boards(user_id)
+            for private in private_boards:
+                private_cards.append(data_handler.get_cards_for_board(private['id']))
+                private_statuses.append(data_handler.get_statuses_for_given_board_id(private['id']))
         for board in boards:
             cards.append(data_handler.get_cards_for_board(board['id']))
             statuses.append(data_handler.get_statuses_for_given_board_id(board['id']))
-        return render_template('index.html', boards=boards, cards=cards, statuses=statuses)
+        return render_template('index.html', boards=boards, cards=cards, statuses=statuses, private_cards=private_cards,
+                               private_boards=private_boards, private_statuses=private_statuses)
 
 
 def delete_board(board_id):
@@ -75,12 +91,13 @@ def login_process():
         user = json.loads(request.data)
         username = user['login']
         password = user['password']
-        if login.login(username, password):
+        user_id = login.login(username, password)
+        if user_id:
             session['username'] = username
+            session['user_id'] = user_id
             session['logged_in'] = True
             return json.dumps({'success': True})
         else:
-            session['error_login'] = True
             return json.dumps({'success': False})
 
 
@@ -88,26 +105,26 @@ def login_process():
 def logout():
     session.pop('username', None)
     session.pop('logged_in', None)
+    session.pop('user_id', None)
     return redirect(url_for('index'))
 
 
-@app.route('/registration_process', methods=['GET', 'POST'])
+@app.route('/register_process', methods=['GET', 'POST'])
 def register_process():
     if request.method == 'POST':
+        user = json.loads(request.data)
 
-        session['error_login'] = False
-        username = request.form['usernameRegister']
-        password = request.form['passwordRegister']
-        if login.register(username, password):
+        username = user['login']
+        password = user['password']
+        user_id = login.register(username, password)
+        if user_id:
             login.login(username, password)
             session['username'] = username
-            session['password'] = password
             session['logged_in'] = True
-            session['error_register'] = False
-            return redirect(url_for('index'))
+            session['user_id'] = user_id
+            return json.dumps({'success': True})
         else:
-            session['error_register'] = True
-            return redirect(url_for('index'))
+            return json.dumps({'success': 'in_use'})
 
 
 def main():

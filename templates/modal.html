@@ -2,7 +2,7 @@
     <span id="modal_title"><h3>Enter board title</h3></span><br>
     <form action="/" method="post" id="board_form">
         <label for="board_title">Title: </label>
-        <input id="board_title" name="board_title"><br>
+        <input id="board_title" name="board_title" value=""><br>
         <input type="hidden" class="hidden" name="hidden" value="none"><br>
         <button type="submit">Send</button>
         <button type="button" id="cancel">Cancel</button>
@@ -39,5 +39,18 @@
         <input type="hidden" id="status_id_for_new_column_title" name="status_id_for_new_column_title" value="none">
         <button type="submit">Send</button>
         <button type="button" id="cancel_for_new_column_title_modal">Cancel</button>
+    </form>
+</div>
+
+<div id="private_modal">
+    <span id="modal_private_title"><h3>Enter board title</h3></span><br>
+    <form action="/" method="POST" id="private_form">
+        <label for="private_title">Title: </label>
+        <input id="private_title" name="private_title"><br>
+        <input type="hidden" name="privateHidden" value="none" id="privateHidden"><br>
+        <input type="hidden" class="hidden" name="hidden" value="none"><br>
+        <input type="hidden" class="hidden" name="board_title" value="none"><br>
+        <button type="submit">Send</button>
+        <button type="button" id="cancelPrivate">Cancel</button>
     </form>
 </div>

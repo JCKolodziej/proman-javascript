@@ -61,7 +61,7 @@ button:hover {
 
 }
 
-#modal_container, #delete_modal, #modal_for_add_card, #modal_for_add_column, #modal_for_change_column_title {
+#modal_container, #delete_modal, #modal_for_add_card, #modal_for_add_column, #modal_for_change_column_title, #private_modal{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -149,5 +149,9 @@ ul {
 
 
 #invalidCredentials{
+    display: none;
+}
+
+#userInUse {
     display: none;
 }

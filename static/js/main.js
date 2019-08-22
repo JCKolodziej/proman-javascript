@@ -1,4 +1,3 @@
-import { dom } from "./dom.js";
 
 // This function is to initialize the application
 function init() {
@@ -6,14 +5,17 @@ function init() {
     // dom.init();
     // loads the boards to the screen
     // dom.loadBoards();
+    renameColumnTitle();
     addNewBoard();
     addNewCard();
     renameBoardTitle();
     deleteBoard();
     loadDragula();
     loginProcess();
+    registrationProcess();
     addNewColumn();
-    renameColumnTitle();
+    addNewPrivateBoard();
+
 }
 
 init();
@@ -24,6 +26,19 @@ function addNewBoard() {
     newBoardButton.addEventListener('click', showModal);
     let cancelButt = document.getElementById('cancel');
     cancelModal(modal, cancelButt);
+}
+
+
+function addNewPrivateBoard() {
+    let newPrivateBoardButton = document.getElementById('addNewPrivateBoardBtn');
+    let privateModal = document.getElementById('private_modal');
+    newPrivateBoardButton.addEventListener("click", function () {
+        privateModal.style.display = 'block';
+        let hiddenInput = document.getElementById('privateHidden');
+        hiddenInput.setAttribute('value', 'private')
+    });
+    let cancelButton = document.getElementById('cancelPrivate');
+    cancelModal(privateModal, cancelButton)
 }
 
 function showModal() {
@@ -92,7 +107,7 @@ function renameColumnTitle() {
         document.getElementById('status_id_for_new_column_title').setAttribute('value', columnId);
     };
     for(let button of renameColumnButtons){
-        button.addEventListener('click', runModalForNewColumnTitle, false);
+        button.addEventListener('click', runModalForNewColumnTitle);
     }
     cancelModal(modal, document.getElementById('cancel_for_new_column_title_modal'));
 }
@@ -127,7 +142,7 @@ function deleteBoard() {
 
 function loadDragula() {
     $('document').ready(function () {
-        let drake = dragula({
+        dragula({
             isContainer: function (el) {
                 return el.classList.contains('dragula-container');
             }
@@ -136,7 +151,8 @@ function loadDragula() {
 
 }
 
-export function loginProcess() {
+function loginProcess() {
+    let url = '/login_process';
     let loginForm = document.getElementById('loginForm');
     let submitButton = document.getElementById('loginButton');
     submitButton.addEventListener("submit", function (event) {
@@ -150,18 +166,18 @@ export function loginProcess() {
         event.preventDefault();
         let username = document.getElementById('defaultForm-username');
         let password = document.getElementById('defaultForm-pass');
-        validationChecker(username.value, password.value)
+        validationChecker(username.value, password.value, url)
     })
 }
 
 
-function validationChecker(login, password) {
+function validationChecker(login, password, url) {
     let validationData = {
         login: login,
         password: password
     };
     console.log(validationData);
-    fetch('/login_process', {
+    fetch(url, {
         method: 'POST',
         mode: "same-origin",
         credentials: "same-origin",
@@ -175,11 +191,37 @@ function validationChecker(login, password) {
         .then(validation => {
             if (validation.success === true) {
                 window.location.replace('/');
-                console.log(validation);
-            } else {
+            } else if (validation.success === 'in_use'){
+                let registerAlert = document.getElementById('userInUse');
+                registerAlert.style.display = 'block';
+                setTimeout(function () {
+                    registerAlert.style.display = 'none'
+                }, 2500)
+            }
+            else {
                 let alertBar = document.getElementById('invalidCredentials');
-                console.log(validation);
-                alertBar.style.display = 'block'
+                alertBar.style.display = 'block';
+                setTimeout(function () {
+                    alertBar.style.display = 'none'
+                }, 2500)
             }
         })
 }
+
+
+function registrationProcess() {
+    let url = '/register_process';
+    let registerForm = document.getElementById('registerForm');
+    let submitButton = document.getElementById('registerButton');
+    submitButton.addEventListener("submit", function (event) {
+        event.preventDefault();
+    });
+
+    registerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let user = document.getElementById('defaultRegister-username');
+        let pass = document.getElementById('defaultRegister-password');
+        validationChecker(user.value, pass.value, url)
+    })
+}
+
